@@ -1,0 +1,18 @@
+import { chromium } from 'playwright';
+import { writeFile } from 'node:fs/promises';
+import assert from 'node:assert/strict';
+const browser = await chromium.connectOverCDP('http://127.0.0.1:9222', { noDefaults: true });
+const page = await browser.contexts()[0].newPage();
+const errors = []; page.on('pageerror', error => errors.push(error.message));
+await page.goto('https://www.nicovideo.jp/watch/sm9', { waitUntil: 'domcontentloaded', timeout: 60000 });
+await page.locator('#nico-drop #open').waitFor({ timeout: 60000 });
+await page.waitForFunction(() => document.querySelector('#nico-drop')?.previousElementSibling?.textContent === document.title.replace(/\s*[-－]\s*ニコニコ動画.*$/, '').trim(), undefined, { timeout: 60000 });
+const title = await page.locator('#nico-drop').evaluate(host => host.previousElementSibling.textContent);
+const placement = await page.locator('#nico-drop').evaluate(host => ({ titleNearby: host.previousElementSibling?.tagName === 'H1', position: getComputedStyle(host).position }));
+await page.locator('#nico-drop #open').click();
+await page.waitForFunction(() => !document.querySelector('#nico-drop')?.shadowRoot?.getElementById('download')?.disabled, undefined, { timeout: 60000 });
+await page.screenshot({ path: 'test-results/real-page.png', fullPage: false });
+assert.ok(title); assert.ok(placement.titleNearby || placement.position === 'fixed');
+await writeFile('test-results/page.json', JSON.stringify({ testedAt: new Date().toISOString(), title, placement, websitePageErrors: errors }, null, 2));
+await page.close(); await browser.close();
+console.log('Live watch page UI placement and quality loading passed');

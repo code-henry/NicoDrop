@@ -1,0 +1,11 @@
+{
+  "manifest_version": 3,
+  "name": "NicoDrop",
+  "version": "1.1.0",
+  "description": "ニコニコ動画を、コメントの有無と画質を選んでMP4保存します。",
+  "minimum_chrome_version": "116",
+  "host_permissions": ["https://*.nicovideo.jp/*", "https://*.nimg.jp/*"],
+  "content_scripts": [{ "matches": ["https://www.nicovideo.jp/*", "https://nicovideo.jp/*"], "js": ["content.js"], "run_at": "document_idle" }],
+  "web_accessible_resources": [{ "resources": ["fonts/NotoSansCJKjp-Bold.otf"], "matches": ["https://www.nicovideo.jp/*", "https://nicovideo.jp/*"] }],
+  "content_security_policy": { "extension_pages": "script-src 'self'; object-src 'self'" }
+}

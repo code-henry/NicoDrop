@@ -1,0 +1,17 @@
+node_modules/
+.npm-cache/
+.browsers/
+.test-profile*/
+test-results/
+watch-probe.json
+third_party_sources/
+.publish/
+/*.zip
+.env
+.env.*
+!.env.example
+*.log
+*.pem
+*.key
+*.mp4
+/dist/__test.*
