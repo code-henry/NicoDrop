@@ -17,7 +17,7 @@
 
 1. ニコニコ動画の視聴ページの動画の下にある「ダウンロード」ボタンを押します。
 
-   ![動画タイトルの下にあるダウンロードボタンの場所](screenshot01.png)
+   ![動画タイトルの下にあるダウンロードボタンの場所](screenshot.png)
 
 2. 画質を選び、必要ならコメントをONにします。
 
@@ -53,7 +53,7 @@ No build is required to install. To rebuild after editing the source, use Node.j
 
 1. Click the **Download** button below the video on a NicoNico watch page.
 
-   ![Location of the Download button below the video title](screenshot01.png)
+   ![Location of the Download button below the video title](screenshot.png)
 
 2. Select your preferred video quality and enable comments if desired.
 
